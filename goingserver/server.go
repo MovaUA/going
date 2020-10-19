@@ -6,6 +6,7 @@ import (
 	"os"
 
 	pb "github.com/movaua/going/going"
+	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 )
 
@@ -20,6 +21,7 @@ type greeterServer struct {
 }
 
 func (s *greeterServer) SayHello(ctx context.Context, req *pb.HelloRequest) (*pb.HelloReply, error) {
+	log.Printf("new request\n%v\n", req)
 	hostname, err := os.Hostname()
 	if err != nil {
 		return nil, err
