@@ -21,7 +21,7 @@ type greeterServer struct {
 }
 
 func (s *greeterServer) SayHello(ctx context.Context, req *pb.HelloRequest) (*pb.HelloReply, error) {
-	log.Printf("new request\n%v\n", req)
+	log.Printf("request: %v\n", req)
 	hostname, err := os.Hostname()
 	if err != nil {
 		return nil, err

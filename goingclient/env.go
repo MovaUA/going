@@ -17,7 +17,7 @@ func getPort() (uint16, error) {
 	}
 	port, err := strconv.ParseUint(envValue, 10, 16)
 	if err != nil {
-		return 0, fmt.Errorf("can't parse environment variable %q: %v", envKey, err)
+		return 0, fmt.Errorf("could not parse %q environment variable: %v", envKey, err)
 	}
 	return uint16(port), nil
 }
