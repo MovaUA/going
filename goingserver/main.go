@@ -14,21 +14,21 @@ func main() {
 	if err != nil {
 		log.Fatalf("can't get port: %v\n", err)
 	}
-	log.Printf("using port %d...\n", port)
+	log.Printf("using port %d\n", port)
 
 	address := fmt.Sprintf(":%d", port)
 	lis, err := net.Listen("tcp", address)
 	if err != nil {
 		log.Fatalf("can't listen %q: %v\n", address, err)
 	}
-	log.Printf("listening %q...\n", address)
+	log.Printf("listening %q\n", address)
 
 	server := newServer()
 	stopped := make(chan error)
 
 	go func() {
 		defer close(stopped)
-		log.Println("serving server...")
+		log.Println("serving server")
 		stopped <- server.Serve(lis)
 	}()
 
@@ -37,7 +37,7 @@ func main() {
 
 	go func() {
 		<-stop
-		log.Println("stopping server...")
+		log.Println("stopping server")
 		server.Stop()
 	}()
 
