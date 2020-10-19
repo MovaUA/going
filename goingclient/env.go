@@ -6,6 +6,21 @@ import (
 	"strconv"
 )
 
+func getHost() (string, error) {
+	const (
+		defaultHost = "localhost"
+		envKey      = "GOING_HOST"
+	)
+	envValue, ok := os.LookupEnv(envKey)
+	if !ok {
+		return defaultHost, nil
+	}
+	if envValue == "" {
+		return "", fmt.Errorf("%q environment variable is empty", envKey)
+	}
+	return envValue, nil
+}
+
 func getPort() (uint16, error) {
 	const (
 		defaultPort = 30051

@@ -17,13 +17,19 @@ const (
 )
 
 func main() {
+	host, err := getHost()
+	if err != nil {
+		log.Fatalf("can't get host: %v\n", err)
+	}
+	log.Printf("using host %q\n", host)
+
 	port, err := getPort()
 	if err != nil {
 		log.Fatalf("can't get port: %v\n", err)
 	}
 	log.Printf("using port %d\n", port)
 
-	address := fmt.Sprintf("localhost:%d", port)
+	address := fmt.Sprintf("%s:%d", host, port)
 
 	log.Printf("connecting to %q\n", address)
 	conn, err := grpc.Dial(address, grpc.WithInsecure(), grpc.WithBlock())
