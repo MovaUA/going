@@ -12,8 +12,7 @@ spec:
   - host: localhost.test
     http:
       paths:
-      - path: /default
-        backend:
+      - backend:
           serviceName: goingserver
           servicePort: grpc
   tls:
