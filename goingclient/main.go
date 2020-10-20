@@ -1,6 +1,8 @@
 package main
 
 import (
+	"crypto/tls"
+
 	pb "github.com/movaua/going/going"
 
 	"context"
@@ -10,6 +12,7 @@ import (
 
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 )
 
 const (
@@ -32,7 +35,10 @@ func main() {
 	address := fmt.Sprintf("%s:%d", host, port)
 
 	log.Printf("connecting to %q\n", address)
-	conn, err := grpc.Dial(address, grpc.WithInsecure(), grpc.WithBlock())
+	config := &tls.Config{
+		InsecureSkipVerify: true,
+	}
+	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(credentials.NewTLS(config)), grpc.WithTimeout(10*time.Second), grpc.WithBlock())
 	if err != nil {
 		log.Fatalf("did not connect: %v\n", err)
 	}
