@@ -1,3 +1,5 @@
 tls/*.crt
 tls/*.key
 tls/*.csr
+**/bin/
+**/obj/
