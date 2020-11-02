@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: goingserver
-        image: valeriymolchanov/goingserver:0.0.2
+        image: valeriymolchanov/goingserver:0.0.3
         ports:
         - containerPort: 30099
           name: grpc
