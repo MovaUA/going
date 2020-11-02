@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gohttpserver
+  labels:
+    app.kubernetes.io/name: gohttpserver
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: gohttpserver
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: gohttpserver
+    spec:
+      containers:
+      - name: gohttpserver
+        image: valeriymolchanov/gohttpserver:0.4
+        ports:
+        - containerPort: 80
+          name: http
+        resources:
+          limits:
+            memory: "200Mi"
+            cpu: "500m"

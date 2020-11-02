@@ -7,6 +7,5 @@ RUN go get -d -v ./goingserver
 RUN go install -v ./goingserver
 
 FROM alpine:3.12.0
-WORKDIR /apps
-COPY --from=build /go/bin/goingserver .
-CMD ["./goingserver"]
+COPY --from=build /go/bin/goingserver /usr/local/bin/
+CMD ["goingserver"]

@@ -5,7 +5,7 @@ metadata:
   labels:
     app.kubernetes.io/name: goingserver
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app.kubernetes.io/name: goingserver
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: goingserver
-        image: valeriymolchanov/goingserver:0.0.3
+        image: valeriymolchanov/goingserver:0.4
         ports:
         - containerPort: 30099
           name: grpc

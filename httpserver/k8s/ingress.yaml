@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: gohttpserver
+spec:
+  rules:
+  - host: localhost.test
+    http:
+      paths:
+      - path: /http(/|$)(.*)
+        backend:
+          serviceName: gohttpserver
+          servicePort: http
+  tls:
+  - hosts:
+      - localhost.test
+    secretName: tls-secret-http
