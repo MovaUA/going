@@ -17,4 +17,4 @@ spec:
   tls:
   - hosts:
       - localhost.test
-    secretName: tls-secret-grpc
+    secretName: tls-secret
