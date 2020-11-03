@@ -18,7 +18,7 @@ namespace dotnetgrpcclient
 			var subdirectoryHandler = new SubdirectoryHandler(httpClientHandler, "/grpc");
 			var httpClient = new HttpClient(subdirectoryHandler);
 
-			using var channel = GrpcChannel.ForAddress("https://localhost.test:443/grpc/", new GrpcChannelOptions
+			using var channel = GrpcChannel.ForAddress("https://localhost.test", new GrpcChannelOptions
 			{
 				HttpClient = httpClient
 			});
@@ -43,7 +43,7 @@ namespace dotnetgrpcclient
 
 		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
-			var url = $"{request.RequestUri.Scheme}://{request.RequestUri.Host}{path}{request.RequestUri.AbsolutePath}";
+			var url = $"{request.RequestUri.Scheme}://{request.RequestUri.Host}:{request.RequestUri.Port:0}{path}{request.RequestUri.AbsolutePath}";
 			request.RequestUri = new Uri(url, UriKind.Absolute);
 			return base.SendAsync(request, cancellationToken);
 		}
