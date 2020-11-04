@@ -4,13 +4,14 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
-  name: goingserver
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  name: gohttpserver
 spec:
   rules:
   - host: localhost.test
     http:
       paths:
-      - path: /grpc(/|$)(.*)
+      - path: /grpc-test/grpc(/|$)(.*)
         backend:
           serviceName: goingserver
           servicePort: grpc
@@ -18,3 +19,49 @@ spec:
   - hosts:
       - localhost.test
     secretName: tls-secret
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   annotations:
+#     nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+#     nginx.ingress.kubernetes.io/rewrite-target: /$2
+#     nginx.ingress.kubernetes.io/use-regex: "true"
+#     # kubernetes.io/ingress.class: "nginx"
+#   name: gohttpserver
+# spec:
+#   rules:
+#   - host: localhost.test
+#     http:
+#       paths:
+#       - path: /grpc(/|$)(.*)
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: goingserver
+#             port:
+#               name: grpc
+#   tls:
+#   - hosts:
+#       - localhost.test
+
+# apiVersion: networking.k8s.io/v1beta1
+# kind: Ingress
+# metadata:
+#   annotations:
+#     nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+#     nginx.ingress.kubernetes.io/rewrite-target: /$2
+#   name: goingserver
+# spec:
+#   rules:
+#   - host: localhost.test
+#     http:
+#       paths:
+#       - path: /grpc(/|$)(.*)
+#         backend:
+#           serviceName: goingserver
+#           servicePort: grpc
+#   tls:
+#   - hosts:
+#       - localhost.test
+#     secretName: tls-secret

@@ -5,12 +5,23 @@ metadata:
   labels:
     app.kubernetes.io/name: goingserver
 spec:
-  type: ClusterIP
   selector:
     app.kubernetes.io/name: goingserver
   ports:
     - name: grpc
-      protocol: TCP
       port: 30111
       targetPort: grpc
-      # nodePort: 30222
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: goingserver
+#   labels:
+#     app.kubernetes.io/name: goingserver
+# spec:
+#   selector:
+#     app.kubernetes.io/name: goingserver
+#   ports:
+#     - name: grpc
+#       port: 30111
+#       targetPort: grpc

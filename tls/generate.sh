@@ -8,7 +8,7 @@ DIR=$(dirname $0)
 
 # Generate the CA Key and Certificate:
 # 
-openssl req -x509 -sha256 -newkey rsa:4096 -keyout "${DIR}/ca.key" -out "${DIR}/ca.crt" -days 3650 -nodes -subj '/CN=LOCALHOST Cert Authority'
+openssl req -x509 -sha256 -newkey rsa:4096 -keyout "${DIR}/ca.key" -out "${DIR}/ca.crt" -days 3650 -nodes -subj '/CN=GRPCTEST Cert Authority'
 
 # Generate the Server Key, and Certificate and Sign with the CA Certificate:
 # 

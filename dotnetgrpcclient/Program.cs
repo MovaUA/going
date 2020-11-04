@@ -15,7 +15,7 @@ namespace dotnetgrpcclient
 				ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
 			};
 
-			var subdirectoryHandler = new SubdirectoryHandler(httpClientHandler, "/grpc");
+			var subdirectoryHandler = new SubdirectoryHandler(httpClientHandler, "/grpc-test/grpc");
 			var httpClient = new HttpClient(subdirectoryHandler);
 
 			using var channel = GrpcChannel.ForAddress("https://localhost.test", new GrpcChannelOptions
